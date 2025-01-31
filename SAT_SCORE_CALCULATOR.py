@@ -35,8 +35,8 @@ else:
     st.write("Enter the number of correct answers for each section below:")
 
     # Input from the user
-    rw_correct = st.number_input("Number of correct answers in Reading and Writing:", min_value=0, max_value=69, step=1)
-    math_correct = st.number_input("Number of correct answers in Math:", min_value=0, max_value=57, step=1)
+    rw_correct = st.number_input("Number of correct answers in Reading and Writing:", min_value=0, max_value=66, step=1)
+    math_correct = st.number_input("Number of correct answers in Math:", min_value=0, max_value=54, step=1)
 
     # Retrieve the scores based on input
     rw_score = grading_data[grading_data['Raw_Score'] == rw_correct]
