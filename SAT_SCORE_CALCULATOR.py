@@ -3,22 +3,24 @@ import pandas as pd
 
 # Load the grading data from the Excel file
 def load_grading_data():
-    file_path = 'Grading Sheet - SAT Exam.xlsx'  # Ensure this file is in the same directory
-    sheet_data = pd.read_excel(file_path)
+    try:
+        file_path = 'Grading Sheet - SAT Exam.xlsx'  # Ensure this file is in the same directory
+        sheet_data = pd.read_excel(file_path)
 
-    # Clean and structure the data
-    structured_data = sheet_data.iloc[1:, :].dropna()
-    structured_data.columns = ["Raw_Score", "RW_Lower", "RW_Upper", "Math_Lower", "Math_Upper"]
-    structured_data = structured_data.astype({
-        "Raw_Score": int,
-        "RW_Lower": int,
-        "RW_Upper": int,
-        "Math_Lower": int,
-        "Math_Upper": int
-    })
-    return structured_data
-
-grading_data = load_grading_data()
+        # Clean and structure the data
+        structured_data = sheet_data.iloc[1:, :].dropna()
+        structured_data.columns = ["Raw_Score", "RW_Lower", "RW_Upper", "Math_Lower", "Math_Upper"]
+        structured_data = structured_data.astype({
+            "Raw_Score": int,
+            "RW_Lower": int,
+            "RW_Upper": int,
+            "Math_Lower": int,
+            "Math_Upper": int
+        })
+        return structured_data
+    except FileNotFoundError:
+        st.error("The Excel file is missing. Please upload the file to the deployment directory.")
+        return pd.DataFrame(columns=["Raw_Score", "RW_Lower", "RW_Upper", "Math_Lower", "Math_Upper"])
 
 # Streamlit app
 st.title("SAT Score Calculator")
